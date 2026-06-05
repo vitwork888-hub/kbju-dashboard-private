@@ -193,9 +193,8 @@ export default function Dashboard() {
                   </span>
                 </div>
               </div>
-              <div className="text-center">
-                <div className="text-xs text-gray-400 mb-1">{targetP}г</div>
-                <div className={`font-body-sm text-sm font-semibold ${proteinColor.textColor}`}>/ {Math.round(totalProteins)}г</div>
+              <div className={`font-body-sm text-sm font-semibold leading-none text-white`}>
+                <span className="text-xs text-gray-400">{targetP}г</span><span className="mx-0.5 text-gray-400">/</span><span className={proteinColor.textColor}>{Math.round(totalProteins)}г</span>
               </div>
             </div>
 
@@ -226,9 +225,8 @@ export default function Dashboard() {
                   </span>
                 </div>
               </div>
-              <div className="text-center">
-                <div className="text-xs text-gray-400 mb-1">{targetF}г</div>
-                <div className={`font-body-sm text-sm font-semibold ${fatsColor.textColor}`}>/ {Math.round(totalFats)}г</div>
+              <div className={`font-body-sm text-sm font-semibold leading-none text-white`}>
+                <span className="text-xs text-gray-400">{targetF}г</span><span className="mx-0.5 text-gray-400">/</span><span className={fatsColor.textColor}>{Math.round(totalFats)}г</span>
               </div>
             </div>
 
@@ -259,9 +257,8 @@ export default function Dashboard() {
                   </span>
                 </div>
               </div>
-              <div className="text-center">
-                <div className="text-xs text-gray-400 mb-1">{targetC}г</div>
-                <div className={`font-body-sm text-sm font-semibold ${carbsColor.textColor}`}>/ {Math.round(totalCarbs)}г</div>
+              <div className={`font-body-sm text-sm font-semibold leading-none text-white`}>
+                <span className="text-xs text-gray-400">{targetC}г</span><span className="mx-0.5 text-gray-400">/</span><span className={carbsColor.textColor}>{Math.round(totalCarbs)}г</span>
               </div>
             </div>
           </div>
