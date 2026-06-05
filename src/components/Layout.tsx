@@ -23,9 +23,9 @@ export default function Layout() {
   }
 
   return (
-    <div className="flex flex-col h-screen bg-gradient-to-b from-blue-50 to-white">
+    <div className="flex flex-col h-screen bg-background">
       {/* Main content */}
-      <main className="flex-1 overflow-y-auto pb-20">
+      <main className="flex-1 overflow-y-auto">
         {renderPage()}
       </main>
 

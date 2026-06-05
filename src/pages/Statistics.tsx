@@ -27,7 +27,11 @@ export default function Statistics() {
   }, [userId, period])
 
   if (loading) {
-    return <div className="flex items-center justify-center h-screen text-on-surface-variant">Загрузка статистики...</div>
+    return (
+      <div className="flex items-center justify-center h-screen text-on-surface-variant">
+        Загрузка статистики...
+      </div>
+    )
   }
 
   const groupedStats = stats.reduce((acc: Record<string, any>, item: any) => {
@@ -44,110 +48,148 @@ export default function Statistics() {
 
   const dates = Object.keys(groupedStats).sort().reverse()
   const targetK = profile?.target_k || 2000
-  const avgKcal = dates.length > 0
-    ? Math.round(dates.reduce((sum, date) => sum + groupedStats[date].k, 0) / dates.length)
-    : 0
+  const avgKcal = dates.length > 0 ? Math.round(dates.reduce((sum, date) => sum + groupedStats[date].k, 0) / dates.length) : 0
+  const streak = dates.filter((date, i) => {
+    if (i === 0) return true
+    const prevDate = new Date(dates[i - 1])
+    const currentDate = new Date(date)
+    return (prevDate.getTime() - currentDate.getTime()) / (1000 * 60 * 60 * 24) <= 1
+  }).length
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-surface-container-low to-background p-container-padding-mobile md:p-container-padding-desktop">
-      <div className="max-w-2xl mx-auto space-y-stack-md">
+    <div className="pt-16 px-container-padding pb-20">
+      <div className="max-w-lg mx-auto space-y-section-margin">
         {/* Header */}
-        <h1 className="font-headline-lg text-headline-lg text-on-background">Статистика</h1>
+        <div>
+          <h2 className="font-display-lg-mobile text-display-lg-mobile text-on-surface mb-2">Статистика</h2>
+          <p className="font-body-lg text-body-lg text-on-surface-variant">Твой прогресс за период</p>
+        </div>
 
         {/* Period Toggle */}
         <div className="flex gap-3">
           <button
             onClick={() => setPeriod(7)}
-            className={`flex-1 py-3 rounded-lg font-label-md text-label-md transition-all active:scale-95 ${
+            className={`flex-1 py-3 rounded-lg font-label-caps text-label-caps transition-all active:scale-95 ${
               period === 7
                 ? 'bg-primary text-on-primary'
-                : 'bg-white/70 text-on-background border border-surface-variant backdrop-blur-sm'
+                : 'glass-card text-on-background'
             }`}
           >
             7 дней
           </button>
           <button
             onClick={() => setPeriod(30)}
-            className={`flex-1 py-3 rounded-lg font-label-md text-label-md transition-all active:scale-95 ${
+            className={`flex-1 py-3 rounded-lg font-label-caps text-label-caps transition-all active:scale-95 ${
               period === 30
                 ? 'bg-primary text-on-primary'
-                : 'bg-white/70 text-on-background border border-surface-variant backdrop-blur-sm'
+                : 'glass-card text-on-background'
             }`}
           >
             30 дней
           </button>
         </div>
 
-        {/* Average Stats */}
-        {dates.length > 0 && (
-          <div className="bg-gradient-to-br from-primary to-primary-container rounded-xl p-6 text-on-primary">
-            <p className="text-sm opacity-90 mb-2">Среднее в день</p>
-            <p className="font-display-lg text-display-lg">{avgKcal}</p>
-            <p className="text-xs opacity-80 mt-2">на основе {dates.length} дней</p>
+        {/* Overview Cards */}
+        <div className="grid grid-cols-2 gap-card-gap">
+          {/* Average Kcal */}
+          <div className="glass-panel rounded-3xl p-6 flex flex-col justify-between">
+            <div className="flex items-center gap-2 mb-4 text-primary">
+              <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>
+                local_fire_department
+              </span>
+              <span className="font-label-caps text-label-caps">СРЕДНЕЕ</span>
+            </div>
+            <div>
+              <div className="font-display-lg-mobile text-display-lg-mobile text-on-surface">{avgKcal}</div>
+              <div className="font-body-sm text-body-sm text-on-surface-variant">ккал/день</div>
+            </div>
           </div>
-        )}
+
+          {/* Streak */}
+          <div className="glass-panel rounded-3xl p-6 flex flex-col justify-between">
+            <div className="flex items-center gap-2 mb-4 text-secondary-container">
+              <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>
+                verified
+              </span>
+              <span className="font-label-caps text-label-caps">СЕРИЯ</span>
+            </div>
+            <div>
+              <div className="font-display-lg-mobile text-display-lg-mobile text-on-surface">
+                {streak} <span className="font-headline-sm text-headline-sm text-on-surface-variant">дн</span>
+              </div>
+              <div className="font-body-sm text-body-sm text-on-surface-variant">активности</div>
+            </div>
+          </div>
+        </div>
 
         {/* Timeline */}
-        <div className="space-y-3">
+        <section>
+          <h3 className="font-headline-md text-headline-md text-on-surface mb-card-gap">
+            {dates.length > 0 ? 'История' : 'Нет данных'}
+          </h3>
+
           {dates.length === 0 ? (
-            <div className="bg-white/70 backdrop-blur-sm rounded-xl p-6 border border-surface-variant text-center">
+            <div className="glass-card rounded-xl p-6 text-center">
               <p className="text-on-surface-variant">Нет данных за этот период</p>
             </div>
           ) : (
-            dates.map((date) => {
-              const data = groupedStats[date]
-              const percent = Math.round((data.k / targetK) * 100)
+            <div className="space-y-3">
+              {dates.map((date) => {
+                const data = groupedStats[date]
+                const percent = Math.round((data.k / targetK) * 100)
+                const dateObj = new Date(date)
 
-              return (
-                <div key={date} className="bg-white/70 backdrop-blur-sm rounded-xl p-4 border border-surface-variant active:scale-95 transition-transform cursor-pointer">
-                  <div className="flex justify-between items-start mb-3">
-                    <div>
-                      <p className="font-body-md text-body-md font-semibold text-on-background">
-                        {new Date(date).toLocaleDateString('ru-RU', {
-                          weekday: 'short',
-                          day: 'numeric',
-                          month: 'short',
-                        })}
-                      </p>
-                      <p className="text-xs text-on-surface-variant mt-1">{data.count} записей</p>
+                return (
+                  <div key={date} className="glass-card rounded-2xl p-4 card-press">
+                    <div className="flex justify-between items-start mb-3">
+                      <div>
+                        <p className="font-body-lg text-body-lg font-semibold text-on-background">
+                          {dateObj.toLocaleDateString('ru-RU', {
+                            weekday: 'short',
+                            day: 'numeric',
+                            month: 'short',
+                          })}
+                        </p>
+                        <p className="text-xs text-on-surface-variant mt-1">{data.count} записей</p>
+                      </div>
+                      <div className="text-right">
+                        <p className="font-display-lg-mobile text-display-lg-mobile text-on-background">{Math.round(data.k)}</p>
+                        <p className="text-xs text-on-surface-variant">ккал</p>
+                      </div>
                     </div>
-                    <div className="text-right">
-                      <p className="font-stats-number text-stats-number text-on-background">{Math.round(data.k)}</p>
-                      <p className="text-xs text-on-surface-variant">ккал</p>
+
+                    {/* Progress Bar */}
+                    <div className="w-full bg-surface-variant rounded-full h-2 mb-4 overflow-hidden">
+                      <div
+                        className="bg-primary h-full transition-all duration-500"
+                        style={{ width: `${Math.min(percent, 100)}%` }}
+                      />
+                    </div>
+
+                    {/* Macro Breakdown */}
+                    <div className="grid grid-cols-3 gap-3 pt-4 border-t border-surface-variant">
+                      <div className="flex flex-col items-center">
+                        <div className="w-2 h-2 rounded-full bg-tertiary mb-1" />
+                        <p className="text-xs text-on-surface-variant uppercase">Б</p>
+                        <p className="font-label-caps text-label-caps text-on-background">{data.p.toFixed(0)}г</p>
+                      </div>
+                      <div className="flex flex-col items-center">
+                        <div className="w-2 h-2 rounded-full bg-secondary mb-1" />
+                        <p className="text-xs text-on-surface-variant uppercase">У</p>
+                        <p className="font-label-caps text-label-caps text-on-background">{data.c.toFixed(0)}г</p>
+                      </div>
+                      <div className="flex flex-col items-center">
+                        <div className="w-2 h-2 rounded-full bg-inverse-surface mb-1" />
+                        <p className="text-xs text-on-surface-variant uppercase">Ж</p>
+                        <p className="font-label-caps text-label-caps text-on-background">{data.f.toFixed(0)}г</p>
+                      </div>
                     </div>
                   </div>
-
-                  {/* Progress Bar */}
-                  <div className="w-full bg-surface-variant rounded-full h-2 mb-4 overflow-hidden">
-                    <div
-                      className="bg-gradient-to-r from-primary to-primary-container h-full transition-all duration-500"
-                      style={{ width: `${Math.min(percent, 100)}%` }}
-                    />
-                  </div>
-
-                  {/* Macro Breakdown */}
-                  <div className="grid grid-cols-3 gap-3 pt-4 border-t border-surface-variant">
-                    <div className="flex flex-col items-center">
-                      <div className="w-2 h-2 rounded-full bg-primary mb-1" />
-                      <p className="text-xs text-on-surface-variant uppercase">Б</p>
-                      <p className="font-label-md text-label-md text-on-background">{data.p.toFixed(0)}г</p>
-                    </div>
-                    <div className="flex flex-col items-center">
-                      <div className="w-2 h-2 rounded-full bg-secondary-container mb-1" />
-                      <p className="text-xs text-on-surface-variant uppercase">Ж</p>
-                      <p className="font-label-md text-label-md text-on-background">{data.f.toFixed(0)}г</p>
-                    </div>
-                    <div className="flex flex-col items-center">
-                      <div className="w-2 h-2 rounded-full bg-error mb-1" />
-                      <p className="text-xs text-on-surface-variant uppercase">У</p>
-                      <p className="font-label-md text-label-md text-on-background">{data.c.toFixed(0)}г</p>
-                    </div>
-                  </div>
-                </div>
-              )
-            })
+                )
+              })}
+            </div>
           )}
-        </div>
+        </section>
       </div>
     </div>
   )
