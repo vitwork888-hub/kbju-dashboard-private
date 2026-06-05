@@ -10,15 +10,24 @@ export default function Dashboard() {
 
   useEffect(() => {
     const loadData = async () => {
-      if (!userId) return
+      console.log('📊 Dashboard loading with userId:', userId)
+      if (!userId) {
+        console.error('❌ No userId available')
+        return
+      }
 
-      const [prof, cals] = await Promise.all([
-        getUserProfile(userId),
-        getTodayCalories(userId),
-      ])
+      try {
+        const [prof, cals] = await Promise.all([
+          getUserProfile(userId),
+          getTodayCalories(userId),
+        ])
 
-      setProfile(prof)
-      setCalories(cals)
+        console.log('✅ Data loaded:', { prof, cals })
+        setProfile(prof)
+        setCalories(cals)
+      } catch (err) {
+        console.error('❌ Error loading data:', err)
+      }
       setLoading(false)
     }
 
