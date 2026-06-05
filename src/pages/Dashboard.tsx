@@ -297,17 +297,17 @@ export default function Dashboard() {
                       <span className="font-body-sm text-body-sm font-semibold">{cal.amount} калорий</span>
                     </div>
                     <div className="flex gap-3 font-label-caps text-label-caps text-gray-400 text-xs">
-                      <span className="flex items-center gap-0.5">
-                        <span className="w-2 h-2 rounded-full bg-tertiary-container" />
-                        {cal.proteins || 0}г
+                      <span className="flex items-center gap-1">
+                        <span className="w-1.5 h-1.5 rounded-full bg-tertiary-container" />
+                        <span>Б: {cal.proteins || 0}г</span>
                       </span>
-                      <span className="flex items-center gap-0.5">
-                        <span className="w-2 h-2 rounded-full bg-secondary-container" />
-                        {cal.carbs || 0}г
+                      <span className="flex items-center gap-1">
+                        <span className="w-1.5 h-1.5 rounded-full bg-surface-variant" />
+                        <span>Ж: {cal.fats || 0}г</span>
                       </span>
-                      <span className="flex items-center gap-0.5">
-                        <span className="w-2 h-2 rounded-full bg-surface-variant" />
-                        {cal.fats || 0}г
+                      <span className="flex items-center gap-1">
+                        <span className="w-1.5 h-1.5 rounded-full bg-secondary-container" />
+                        <span>У: {cal.carbs || 0}г</span>
                       </span>
                     </div>
                   </div>
