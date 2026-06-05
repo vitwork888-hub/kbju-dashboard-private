@@ -3,6 +3,7 @@ import Dashboard from '../pages/Dashboard'
 import Profile from '../pages/Profile'
 import Statistics from '../pages/Statistics'
 import BottomNav from './BottomNav'
+import DebugInfo from './DebugInfo'
 
 type Page = 'dashboard' | 'profile' | 'stats'
 
@@ -28,6 +29,9 @@ export default function Layout() {
       <main className="flex-1 overflow-y-auto pb-20">
         {renderPage()}
       </main>
+
+      {/* Debug info */}
+      <DebugInfo />
 
       {/* Bottom navigation */}
       <BottomNav currentPage={currentPage} onPageChange={setCurrentPage} />
