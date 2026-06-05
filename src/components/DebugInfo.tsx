@@ -1,7 +1,7 @@
 import { useTelegram } from '../context/TelegramContext'
 
 export default function DebugInfo() {
-  const { userId, isReady } = useTelegram()
+  const { userId } = useTelegram()
 
   if (!userId) {
     return (
