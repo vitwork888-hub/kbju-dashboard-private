@@ -89,7 +89,7 @@ export default function Statistics() {
           ) : (
             dates.map((date) => {
               const data = groupedStats[date]
-              const percent = Math.round((data.k / (profile?.target_k || 2000)) * 100)
+              const percent = Math.round((data.k / 2000) * 100)
 
               return (
                 <div key={date} className="bg-white rounded-lg p-4 shadow">
