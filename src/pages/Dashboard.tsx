@@ -259,7 +259,11 @@ export default function Dashboard() {
                   <div className="flex-1">
                     <div className="flex justify-between items-start mb-1">
                       <h3 className="font-body-lg text-body-lg font-semibold text-white">{cal.note}</h3>
-                      <span className="font-label-caps text-label-caps text-gray-400 opacity-70 text-xs">сейчас</span>
+                      <span className="font-label-caps text-label-caps text-gray-400 opacity-70 text-xs">
+                        {cal.created_at
+                          ? new Date(cal.created_at).toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit', hour12: false })
+                          : 'сейчас'}
+                      </span>
                     </div>
                     <div className="flex items-center gap-1 text-white mb-1">
                       <span className="material-symbols-outlined text-sm text-primary-fixed-dim" style={{ fontVariationSettings: "'FILL' 1" }}>
