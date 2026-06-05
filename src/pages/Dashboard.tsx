@@ -193,8 +193,8 @@ export default function Dashboard() {
                   </span>
                 </div>
               </div>
-              <div className={`font-body-sm text-sm font-semibold leading-none ${proteinColor.textColor}`}>
-                {targetP}<span className="text-xs text-gray-400 font-normal ml-0.5">/ {Math.round(totalProteins)}г</span>
+              <div className="font-body-sm text-sm font-semibold leading-none text-white">
+                {targetP}<span className={`text-xs font-normal ml-0.5 ${proteinColor.textColor}`}>/ {Math.round(totalProteins)}г</span>
               </div>
             </div>
 
@@ -225,8 +225,8 @@ export default function Dashboard() {
                   </span>
                 </div>
               </div>
-              <div className={`font-body-sm text-sm font-semibold leading-none ${fatsColor.textColor}`}>
-                {targetF}<span className="text-xs text-gray-400 font-normal ml-0.5">/ {Math.round(totalFats)}г</span>
+              <div className="font-body-sm text-sm font-semibold leading-none text-white">
+                {targetF}<span className={`text-xs font-normal ml-0.5 ${fatsColor.textColor}`}>/ {Math.round(totalFats)}г</span>
               </div>
             </div>
 
@@ -257,8 +257,8 @@ export default function Dashboard() {
                   </span>
                 </div>
               </div>
-              <div className={`font-body-sm text-sm font-semibold leading-none ${carbsColor.textColor}`}>
-                {targetC}<span className="text-xs text-gray-400 font-normal ml-0.5">/ {Math.round(totalCarbs)}г</span>
+              <div className="font-body-sm text-sm font-semibold leading-none text-white">
+                {targetC}<span className={`text-xs font-normal ml-0.5 ${carbsColor.textColor}`}>/ {Math.round(totalCarbs)}г</span>
               </div>
             </div>
           </div>
