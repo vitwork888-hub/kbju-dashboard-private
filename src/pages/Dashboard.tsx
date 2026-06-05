@@ -144,8 +144,8 @@ export default function Dashboard() {
                 </div>
               </div>
               <div>
-                <h1 className={`font-display-lg-mobile leading-none mb-1 ${calorieTextColor}`}>
-                  {Math.round(totalCalories)} <span className="text-headline-sm text-gray-400 font-normal">/ {targetK}</span>
+                <h1 className="font-display-lg-mobile text-white leading-none mb-1">
+                  {targetK} <span className={`text-headline-sm font-normal ${calorieTextColor}`}>/ {Math.round(totalCalories)}</span>
                 </h1>
                 <p className="font-body-sm text-gray-400">ккал</p>
               </div>

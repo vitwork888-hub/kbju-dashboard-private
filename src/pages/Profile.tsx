@@ -30,6 +30,16 @@ export default function Profile() {
     bulk: '📈 Набор массы',
     maintain: '⚖️ Поддержание',
     custom: '🎯 Свой план',
+    'cut': '📉 Похудение',
+    'bulk': '📈 Набор массы',
+    'maintain': '⚖️ Поддержание',
+  }
+
+  // Get goal label or show raw value if not found
+  const getGoalLabel = (goal: string) => {
+    if (!goal) return '🎯 Цель'
+    const normalized = goal.toLowerCase().trim()
+    return goalLabels[normalized] || `${goal}`
   }
 
   const activityLabels: Record<string, string> = {
@@ -85,7 +95,7 @@ export default function Profile() {
                 </div>
                 <div className="flex-1">
                   <p className="font-body-sm text-gray-400 text-xs mb-1">Цель</p>
-                  <p className="font-headline-sm text-headline-sm text-white">{goalLabels[profile.goal] || profile.goal}</p>
+                  <p className="font-headline-sm text-headline-sm text-white">{getGoalLabel(profile.goal)}</p>
                 </div>
               </div>
               <div className="border-t border-white/10 pt-4">
