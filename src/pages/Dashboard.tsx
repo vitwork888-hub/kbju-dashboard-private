@@ -30,7 +30,7 @@ export default function Dashboard() {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-screen">
-        <p className="text-on-surface-variant">Загрузка дневника...</p>
+        <p className="text-gray-400">Загрузка дневника...</p>
       </div>
     )
   }
@@ -69,51 +69,59 @@ export default function Dashboard() {
   })
 
   return (
-    <div className="pt-20 px-container-padding pb-32">
+    <div className="pt-20 px-container-padding pb-32 bg-[#0b1326] min-h-screen">
       <div className="max-w-4xl mx-auto space-y-5">
+        {/* Bot Name Header */}
+        <div className="flex items-center gap-2 mb-6">
+          <span className="material-symbols-outlined text-primary-fixed-dim text-3xl" style={{ fontVariationSettings: "'FILL' 1" }}>
+            eco
+          </span>
+          <h1 className="font-headline-sm text-white font-bold">Cal AI</h1>
+        </div>
+
         {/* Calendar Strip */}
-        <section className="glass-card rounded-2xl p-4 flex justify-between items-center">
+        <section className="glass-card-dark rounded-2xl p-4 flex justify-between items-center">
           {calendarDays.map((day, i) => (
             <div
               key={i}
               className={`flex flex-col items-center gap-1 ${day.isToday ? '' : 'opacity-50'}`}
             >
-              <span className="font-label-caps text-label-caps text-on-surface-variant">{day.day}</span>
+              <span className="font-label-caps text-label-caps text-gray-400">{day.day}</span>
               {day.isToday ? (
-                <div className="flex flex-col items-center gap-1 bg-white rounded-full p-1 pb-2 shadow-sm border border-primary/20 relative">
-                  <span className="font-label-caps text-label-caps text-on-surface mt-1 px-2 text-xs">{day.day}</span>
-                  <div className="w-10 h-10 flex items-center justify-center rounded-full bg-primary/10 border-2 border-primary text-primary font-bold text-sm">
+                <div className="flex flex-col items-center gap-1 bg-white/10 rounded-full p-1 pb-2 shadow-sm border border-primary-fixed-dim/30 relative">
+                  <span className="font-label-caps text-label-caps text-white mt-1 px-2 text-xs">{day.day}</span>
+                  <div className="w-10 h-10 flex items-center justify-center rounded-full bg-primary-fixed-dim/20 border-2 border-primary-fixed-dim text-primary-fixed-dim font-bold text-sm">
                     {day.date}
                   </div>
-                  <div className="absolute -bottom-1 w-1 h-1 bg-primary rounded-full" />
+                  <div className="absolute -bottom-1 w-1 h-1 bg-primary-fixed-dim rounded-full" />
                 </div>
               ) : (
-                <span className="font-body-sm text-body-sm w-10 h-10 flex items-center justify-center">{day.date}</span>
+                <span className="font-body-sm text-body-sm w-10 h-10 flex items-center justify-center text-white">{day.date}</span>
               )}
             </div>
           ))}
         </section>
 
         {/* Combined Dashboard */}
-        <section className="glass-card rounded-2xl p-5 flex flex-col gap-6 relative overflow-hidden">
+        <section className="glass-card-dark rounded-2xl p-5 flex flex-col gap-6 relative overflow-hidden">
           {/* Decorative blur */}
-          <div className="absolute -top-10 -right-10 w-40 h-40 bg-primary/10 rounded-full blur-3xl z-0" />
+          <div className="absolute -top-10 -right-10 w-40 h-40 bg-primary-fixed-dim/20 rounded-full blur-3xl z-0" />
 
           {/* Top Overview with mini ring */}
           <div className="flex items-center justify-between z-10">
             <div className="flex items-center gap-4">
               <div className="relative w-20 h-20 flex-shrink-0">
                 <svg className="w-full h-full circle-progress" viewBox="0 0 100 100">
-                  <circle cx="50" cy="50" fill="none" r="42" stroke="currentColor" strokeWidth="10" strokeLinecap="round" className="text-surface-variant opacity-30" />
+                  <circle cx="50" cy="50" fill="none" r="42" stroke="rgba(255,255,255,0.1)" strokeWidth="10" strokeLinecap="round" />
                   <circle
                     cx="50"
                     cy="50"
                     fill="none"
                     r="42"
-                    stroke="currentColor"
+                    stroke="#4ae176"
                     strokeWidth="10"
                     strokeLinecap="round"
-                    className="text-primary transition-all duration-1000"
+                    className="transition-all duration-1000"
                     style={{
                       strokeDasharray: `${2 * Math.PI * 42}`,
                       strokeDashoffset: `${2 * Math.PI * 42 - (caloriePercent / 100) * 2 * Math.PI * 42}`,
@@ -121,16 +129,16 @@ export default function Dashboard() {
                   />
                 </svg>
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <span className="material-symbols-outlined text-primary text-2xl" style={{ fontVariationSettings: "'FILL' 1" }}>
+                  <span className="material-symbols-outlined text-primary-fixed-dim text-2xl" style={{ fontVariationSettings: "'FILL' 1" }}>
                     local_fire_department
                   </span>
                 </div>
               </div>
               <div>
-                <h1 className="font-display-lg-mobile text-on-surface leading-none mb-1">
-                  {remaining} <span className="text-headline-sm text-on-surface-variant font-normal">/ {targetK}</span>
+                <h1 className="font-display-lg-mobile text-white leading-none mb-1">
+                  {remaining} <span className="text-headline-sm text-gray-400 font-normal">/ {targetK}</span>
                 </h1>
-                <p className="font-body-sm text-on-surface-variant">ккал осталось</p>
+                <p className="font-body-sm text-gray-400">ккал осталось</p>
               </div>
             </div>
           </div>
@@ -138,20 +146,20 @@ export default function Dashboard() {
           {/* Macro Cards Grid */}
           <div className="grid grid-cols-3 gap-3 z-10">
             {/* Proteins */}
-            <div className="bg-white/50 rounded-3xl p-3 flex flex-col items-center justify-center text-center shadow-sm border border-white/60">
-              <div className="font-label-caps text-on-surface-variant mb-1 text-xs uppercase">Белки</div>
+            <div className="bg-white/5 rounded-3xl p-3 flex flex-col items-center justify-center text-center border border-white/10">
+              <div className="font-label-caps text-gray-400 mb-1 text-xs uppercase">Белки</div>
               <div className="relative w-12 h-12 mb-2">
                 <svg className="w-full h-full circle-progress" viewBox="0 0 100 100">
-                  <circle cx="50" cy="50" fill="none" r="40" stroke="currentColor" strokeWidth="10" className="text-error-container opacity-50" />
+                  <circle cx="50" cy="50" fill="none" r="40" stroke="rgba(255,255,255,0.1)" strokeWidth="10" />
                   <circle
                     cx="50"
                     cy="50"
                     fill="none"
                     r="40"
-                    stroke="currentColor"
+                    stroke="#ff8a83"
                     strokeWidth="10"
                     strokeLinecap="round"
-                    className="text-tertiary transition-all duration-1000"
+                    className="transition-all duration-1000"
                     style={{
                       strokeDasharray: `${2 * Math.PI * 40}`,
                       strokeDashoffset: `${2 * Math.PI * 40 - (proteinPercent / 100) * 2 * Math.PI * 40}`,
@@ -159,31 +167,31 @@ export default function Dashboard() {
                   />
                 </svg>
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <span className="material-symbols-outlined text-tertiary text-sm" style={{ fontVariationSettings: "'FILL' 1" }}>
+                  <span className="material-symbols-outlined text-tertiary-container text-sm" style={{ fontVariationSettings: "'FILL' 1" }}>
                     egg_alt
                   </span>
                 </div>
               </div>
-              <div className="font-body-sm text-sm font-semibold text-on-surface leading-none">
-                {Math.round(totalProteins)}<span className="text-xs text-on-surface-variant font-normal ml-0.5">/{targetP}г</span>
+              <div className="font-body-sm text-sm font-semibold text-white leading-none">
+                {Math.round(totalProteins)}<span className="text-xs text-gray-400 font-normal ml-0.5">/{targetP}г</span>
               </div>
             </div>
 
             {/* Carbs */}
-            <div className="bg-white/50 rounded-3xl p-3 flex flex-col items-center justify-center text-center shadow-sm border border-white/60">
-              <div className="font-label-caps text-on-surface-variant mb-1 text-xs uppercase">Углеводы</div>
+            <div className="bg-white/5 rounded-3xl p-3 flex flex-col items-center justify-center text-center border border-white/10">
+              <div className="font-label-caps text-gray-400 mb-1 text-xs uppercase">Углеводы</div>
               <div className="relative w-12 h-12 mb-2">
                 <svg className="w-full h-full circle-progress" viewBox="0 0 100 100">
-                  <circle cx="50" cy="50" fill="none" r="40" stroke="currentColor" strokeWidth="10" className="text-secondary-fixed opacity-50" />
+                  <circle cx="50" cy="50" fill="none" r="40" stroke="rgba(255,255,255,0.1)" strokeWidth="10" />
                   <circle
                     cx="50"
                     cy="50"
                     fill="none"
                     r="40"
-                    stroke="currentColor"
+                    stroke="#fd761a"
                     strokeWidth="10"
                     strokeLinecap="round"
-                    className="text-secondary transition-all duration-1000"
+                    className="transition-all duration-1000"
                     style={{
                       strokeDasharray: `${2 * Math.PI * 40}`,
                       strokeDashoffset: `${2 * Math.PI * 40 - (carbsPercent / 100) * 2 * Math.PI * 40}`,
@@ -191,31 +199,31 @@ export default function Dashboard() {
                   />
                 </svg>
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <span className="material-symbols-outlined text-secondary text-sm" style={{ fontVariationSettings: "'FILL' 1" }}>
+                  <span className="material-symbols-outlined text-secondary-container text-sm" style={{ fontVariationSettings: "'FILL' 1" }}>
                     bakery_dining
                   </span>
                 </div>
               </div>
-              <div className="font-body-sm text-sm font-semibold text-on-surface leading-none">
-                {Math.round(totalCarbs)}<span className="text-xs text-on-surface-variant font-normal ml-0.5">/{targetC}г</span>
+              <div className="font-body-sm text-sm font-semibold text-white leading-none">
+                {Math.round(totalCarbs)}<span className="text-xs text-gray-400 font-normal ml-0.5">/{targetC}г</span>
               </div>
             </div>
 
             {/* Fats */}
-            <div className="bg-white/50 rounded-3xl p-3 flex flex-col items-center justify-center text-center shadow-sm border border-white/60">
-              <div className="font-label-caps text-on-surface-variant mb-1 text-xs uppercase">Жиры</div>
+            <div className="bg-white/5 rounded-3xl p-3 flex flex-col items-center justify-center text-center border border-white/10">
+              <div className="font-label-caps text-gray-400 mb-1 text-xs uppercase">Жиры</div>
               <div className="relative w-12 h-12 mb-2">
                 <svg className="w-full h-full circle-progress" viewBox="0 0 100 100">
-                  <circle cx="50" cy="50" fill="none" r="40" stroke="currentColor" strokeWidth="10" className="text-surface-variant opacity-50" />
+                  <circle cx="50" cy="50" fill="none" r="40" stroke="rgba(255,255,255,0.1)" strokeWidth="10" />
                   <circle
                     cx="50"
                     cy="50"
                     fill="none"
                     r="40"
-                    stroke="currentColor"
+                    stroke="#dae2fd"
                     strokeWidth="10"
                     strokeLinecap="round"
-                    className="text-inverse-surface transition-all duration-1000"
+                    className="transition-all duration-1000"
                     style={{
                       strokeDasharray: `${2 * Math.PI * 40}`,
                       strokeDashoffset: `${2 * Math.PI * 40 - (fatsPercent / 100) * 2 * Math.PI * 40}`,
@@ -223,13 +231,13 @@ export default function Dashboard() {
                   />
                 </svg>
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <span className="material-symbols-outlined text-inverse-surface text-sm" style={{ fontVariationSettings: "'FILL' 1" }}>
+                  <span className="material-symbols-outlined text-surface-variant text-sm" style={{ fontVariationSettings: "'FILL' 1" }}>
                     water_drop
                   </span>
                 </div>
               </div>
-              <div className="font-body-sm text-sm font-semibold text-on-surface leading-none">
-                {Math.round(totalFats)}<span className="text-xs text-on-surface-variant font-normal ml-0.5">/{targetF}г</span>
+              <div className="font-body-sm text-sm font-semibold text-white leading-none">
+                {Math.round(totalFats)}<span className="text-xs text-gray-400 font-normal ml-0.5">/{targetF}г</span>
               </div>
             </div>
           </div>
@@ -237,41 +245,43 @@ export default function Dashboard() {
 
         {/* Food Log */}
         <section className="flex flex-col gap-4 pb-8">
-          <h2 className="font-headline-sm text-headline-sm text-on-surface">Дневник за сегодня</h2>
+          <h2 className="font-headline-sm text-headline-sm text-white">Дневник за сегодня</h2>
 
           {calories.length === 0 ? (
-            <div className="glass-card rounded-2xl p-6 text-center">
-              <p className="text-on-surface-variant">Пока нет записей</p>
+            <div className="glass-card-dark rounded-2xl p-6 text-center">
+              <p className="text-gray-400">Пока нет записей</p>
             </div>
           ) : (
             <div className="space-y-3">
               {calories.map((cal) => (
-                <div key={cal.id} className="glass-card rounded-2xl p-3 flex gap-4 items-center card-press">
-                  <div className="w-20 h-20 rounded-xl overflow-hidden flex-shrink-0 bg-surface-container-highest flex items-center justify-center text-3xl">
-                    📍
+                <div key={cal.id} className="glass-card-dark rounded-2xl p-3 flex gap-4 items-center card-press border border-white/10">
+                  <div className="w-16 h-16 rounded-xl overflow-hidden flex-shrink-0 bg-blue-500/20 flex items-center justify-center text-blue-400">
+                    <span className="material-symbols-outlined text-3xl" style={{ fontVariationSettings: "'FILL' 1" }}>
+                      restaurant
+                    </span>
                   </div>
                   <div className="flex-1">
                     <div className="flex justify-between items-start mb-1">
-                      <h3 className="font-body-lg text-body-lg font-semibold text-on-surface">{cal.note}</h3>
-                      <span className="font-label-caps text-label-caps text-on-surface-variant opacity-70 text-xs">сейчас</span>
+                      <h3 className="font-body-lg text-body-lg font-semibold text-white">{cal.note}</h3>
+                      <span className="font-label-caps text-label-caps text-gray-400 opacity-70 text-xs">сейчас</span>
                     </div>
-                    <div className="flex items-center gap-1 text-on-surface mb-1">
-                      <span className="material-symbols-outlined text-sm" style={{ fontVariationSettings: "'FILL' 1" }}>
+                    <div className="flex items-center gap-1 text-white mb-1">
+                      <span className="material-symbols-outlined text-sm text-primary-fixed-dim" style={{ fontVariationSettings: "'FILL' 1" }}>
                         local_fire_department
                       </span>
                       <span className="font-body-sm text-body-sm font-semibold">{cal.amount} калорий</span>
                     </div>
-                    <div className="flex gap-3 font-label-caps text-label-caps text-on-surface-variant text-xs">
+                    <div className="flex gap-3 font-label-caps text-label-caps text-gray-400 text-xs">
                       <span className="flex items-center gap-0.5">
-                        <span className="w-2 h-2 rounded-full bg-tertiary" />
+                        <span className="w-2 h-2 rounded-full bg-tertiary-container" />
                         {cal.proteins || 0}г
                       </span>
                       <span className="flex items-center gap-0.5">
-                        <span className="w-2 h-2 rounded-full bg-secondary" />
+                        <span className="w-2 h-2 rounded-full bg-secondary-container" />
                         {cal.carbs || 0}г
                       </span>
                       <span className="flex items-center gap-0.5">
-                        <span className="w-2 h-2 rounded-full bg-inverse-surface" />
+                        <span className="w-2 h-2 rounded-full bg-surface-variant" />
                         {cal.fats || 0}г
                       </span>
                     </div>

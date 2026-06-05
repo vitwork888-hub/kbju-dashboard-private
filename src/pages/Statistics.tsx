@@ -28,7 +28,7 @@ export default function Statistics() {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center h-screen text-on-surface-variant">
+      <div className="flex items-center justify-center h-screen text-gray-400 bg-[#0b1326]">
         Загрузка статистики...
       </div>
     )
@@ -57,12 +57,12 @@ export default function Statistics() {
   }).length
 
   return (
-    <div className="pt-16 px-container-padding pb-20">
+    <div className="pt-16 px-container-padding pb-20 bg-[#0b1326] min-h-screen">
       <div className="max-w-lg mx-auto space-y-section-margin">
         {/* Header */}
         <div>
-          <h2 className="font-display-lg-mobile text-display-lg-mobile text-on-surface mb-2">Статистика</h2>
-          <p className="font-body-lg text-body-lg text-on-surface-variant">Твой прогресс за период</p>
+          <h2 className="font-display-lg-mobile text-white mb-2">Статистика</h2>
+          <p className="font-body-lg text-body-lg text-gray-400">Твой прогресс за период</p>
         </div>
 
         {/* Period Toggle */}
@@ -71,8 +71,8 @@ export default function Statistics() {
             onClick={() => setPeriod(7)}
             className={`flex-1 py-3 rounded-lg font-label-caps text-label-caps transition-all active:scale-95 ${
               period === 7
-                ? 'bg-primary text-on-primary'
-                : 'glass-card text-on-background'
+                ? 'bg-primary-fixed-dim text-white'
+                : 'glass-card-dark text-white border border-white/10'
             }`}
           >
             7 дней
@@ -81,8 +81,8 @@ export default function Statistics() {
             onClick={() => setPeriod(30)}
             className={`flex-1 py-3 rounded-lg font-label-caps text-label-caps transition-all active:scale-95 ${
               period === 30
-                ? 'bg-primary text-on-primary'
-                : 'glass-card text-on-background'
+                ? 'bg-primary-fixed-dim text-white'
+                : 'glass-card-dark text-white border border-white/10'
             }`}
           >
             30 дней
@@ -92,21 +92,21 @@ export default function Statistics() {
         {/* Overview Cards */}
         <div className="grid grid-cols-2 gap-card-gap">
           {/* Average Kcal */}
-          <div className="glass-panel rounded-3xl p-6 flex flex-col justify-between">
-            <div className="flex items-center gap-2 mb-4 text-primary">
+          <div className="glass-panel-dark rounded-3xl p-6 flex flex-col justify-between border border-white/10">
+            <div className="flex items-center gap-2 mb-4 text-primary-fixed-dim">
               <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>
                 local_fire_department
               </span>
               <span className="font-label-caps text-label-caps">СРЕДНЕЕ</span>
             </div>
             <div>
-              <div className="font-display-lg-mobile text-display-lg-mobile text-on-surface">{avgKcal}</div>
-              <div className="font-body-sm text-body-sm text-on-surface-variant">ккал/день</div>
+              <div className="font-display-lg-mobile text-white">{avgKcal}</div>
+              <div className="font-body-sm text-body-sm text-gray-400">ккал/день</div>
             </div>
           </div>
 
           {/* Streak */}
-          <div className="glass-panel rounded-3xl p-6 flex flex-col justify-between">
+          <div className="glass-panel-dark rounded-3xl p-6 flex flex-col justify-between border border-white/10">
             <div className="flex items-center gap-2 mb-4 text-secondary-container">
               <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>
                 verified
@@ -114,23 +114,23 @@ export default function Statistics() {
               <span className="font-label-caps text-label-caps">СЕРИЯ</span>
             </div>
             <div>
-              <div className="font-display-lg-mobile text-display-lg-mobile text-on-surface">
-                {streak} <span className="font-headline-sm text-headline-sm text-on-surface-variant">дн</span>
+              <div className="font-display-lg-mobile text-white">
+                {streak} <span className="font-headline-sm text-headline-sm text-gray-400">дн</span>
               </div>
-              <div className="font-body-sm text-body-sm text-on-surface-variant">активности</div>
+              <div className="font-body-sm text-body-sm text-gray-400">активности</div>
             </div>
           </div>
         </div>
 
         {/* Timeline */}
         <section>
-          <h3 className="font-headline-md text-headline-md text-on-surface mb-card-gap">
+          <h3 className="font-headline-md text-headline-md text-white mb-card-gap">
             {dates.length > 0 ? 'История' : 'Нет данных'}
           </h3>
 
           {dates.length === 0 ? (
-            <div className="glass-card rounded-xl p-6 text-center">
-              <p className="text-on-surface-variant">Нет данных за этот период</p>
+            <div className="glass-card-dark rounded-xl p-6 text-center border border-white/10">
+              <p className="text-gray-400">Нет данных за этот период</p>
             </div>
           ) : (
             <div className="space-y-3">
@@ -140,48 +140,48 @@ export default function Statistics() {
                 const dateObj = new Date(date)
 
                 return (
-                  <div key={date} className="glass-card rounded-2xl p-4 card-press">
+                  <div key={date} className="glass-card-dark rounded-2xl p-4 card-press border border-white/10">
                     <div className="flex justify-between items-start mb-3">
                       <div>
-                        <p className="font-body-lg text-body-lg font-semibold text-on-background">
+                        <p className="font-body-lg text-body-lg font-semibold text-white">
                           {dateObj.toLocaleDateString('ru-RU', {
                             weekday: 'short',
                             day: 'numeric',
                             month: 'short',
                           })}
                         </p>
-                        <p className="text-xs text-on-surface-variant mt-1">{data.count} записей</p>
+                        <p className="text-xs text-gray-400 mt-1">{data.count} записей</p>
                       </div>
                       <div className="text-right">
-                        <p className="font-display-lg-mobile text-display-lg-mobile text-on-background">{Math.round(data.k)}</p>
-                        <p className="text-xs text-on-surface-variant">ккал</p>
+                        <p className="font-display-lg-mobile text-white">{Math.round(data.k)}</p>
+                        <p className="text-xs text-gray-400">ккал</p>
                       </div>
                     </div>
 
                     {/* Progress Bar */}
-                    <div className="w-full bg-surface-variant rounded-full h-2 mb-4 overflow-hidden">
+                    <div className="w-full bg-white/10 rounded-full h-2 mb-4 overflow-hidden">
                       <div
-                        className="bg-primary h-full transition-all duration-500"
+                        className="bg-primary-fixed-dim h-full transition-all duration-500"
                         style={{ width: `${Math.min(percent, 100)}%` }}
                       />
                     </div>
 
                     {/* Macro Breakdown */}
-                    <div className="grid grid-cols-3 gap-3 pt-4 border-t border-surface-variant">
+                    <div className="grid grid-cols-3 gap-3 pt-4 border-t border-white/10">
                       <div className="flex flex-col items-center">
-                        <div className="w-2 h-2 rounded-full bg-tertiary mb-1" />
-                        <p className="text-xs text-on-surface-variant uppercase">Б</p>
-                        <p className="font-label-caps text-label-caps text-on-background">{data.p.toFixed(0)}г</p>
+                        <div className="w-2 h-2 rounded-full bg-tertiary-container mb-1" />
+                        <p className="text-xs text-gray-400 uppercase">Б</p>
+                        <p className="font-label-caps text-label-caps text-white">{data.p.toFixed(0)}г</p>
                       </div>
                       <div className="flex flex-col items-center">
-                        <div className="w-2 h-2 rounded-full bg-secondary mb-1" />
-                        <p className="text-xs text-on-surface-variant uppercase">У</p>
-                        <p className="font-label-caps text-label-caps text-on-background">{data.c.toFixed(0)}г</p>
+                        <div className="w-2 h-2 rounded-full bg-secondary-container mb-1" />
+                        <p className="text-xs text-gray-400 uppercase">У</p>
+                        <p className="font-label-caps text-label-caps text-white">{data.c.toFixed(0)}г</p>
                       </div>
                       <div className="flex flex-col items-center">
-                        <div className="w-2 h-2 rounded-full bg-inverse-surface mb-1" />
-                        <p className="text-xs text-on-surface-variant uppercase">Ж</p>
-                        <p className="font-label-caps text-label-caps text-on-background">{data.f.toFixed(0)}г</p>
+                        <div className="w-2 h-2 rounded-full bg-surface-variant mb-1" />
+                        <p className="text-xs text-gray-400 uppercase">Ж</p>
+                        <p className="font-label-caps text-label-caps text-white">{data.f.toFixed(0)}г</p>
                       </div>
                     </div>
                   </div>

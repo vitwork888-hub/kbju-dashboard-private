@@ -11,15 +11,15 @@ export default function BottomNav({ currentPage, onPageChange }: BottomNavProps)
   ]
 
   return (
-    <nav className="glass-dock fixed bottom-0 left-0 right-0 z-50 flex justify-around items-center h-20 px-6 rounded-full mx-auto mb-8 w-[90%] md:hidden safe-bottom">
+    <nav className="glass-dock-dark fixed bottom-0 left-0 right-0 z-50 flex justify-around items-center h-20 px-6 rounded-full mx-auto mb-8 w-[90%] md:hidden safe-bottom border border-white/10">
       {navItems.map((item) => (
         <button
           key={item.id}
           onClick={() => onPageChange(item.id as 'dashboard' | 'stats' | 'profile')}
           className={`flex flex-col items-center justify-center gap-1 p-2 rounded-full transition-all active:scale-95 ${
             currentPage === item.id
-              ? 'bg-primary text-on-primary shadow-lg'
-              : 'text-on-surface-variant hover:bg-primary-container/30'
+              ? 'bg-primary text-white shadow-lg'
+              : 'text-gray-400 hover:bg-white/10'
           }`}
           style={{ scale: '1.1' }}
         >
@@ -32,7 +32,7 @@ export default function BottomNav({ currentPage, onPageChange }: BottomNavProps)
       ))}
 
       {/* FAB Button */}
-      <button className="absolute -right-2 -top-2 bg-on-surface text-surface w-14 h-14 rounded-full flex items-center justify-center shadow-xl hover:scale-105 active:scale-95 transition-transform z-50">
+      <button className="absolute -right-2 -top-2 bg-white text-[#0b1326] w-14 h-14 rounded-full flex items-center justify-center shadow-xl hover:scale-105 active:scale-95 transition-transform z-50">
         <span className="material-symbols-outlined text-2xl">add</span>
       </button>
     </nav>

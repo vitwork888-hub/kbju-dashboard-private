@@ -23,7 +23,7 @@ export default function Layout() {
   }
 
   return (
-    <div className="flex flex-col h-screen bg-background">
+    <div className="flex flex-col h-screen bg-[#0b1326]">
       {/* Main content */}
       <main className="flex-1 overflow-y-auto">
         {renderPage()}
