@@ -64,6 +64,18 @@ export default function Dashboard() {
     calorieTextColor = 'text-yellow-400'
   }
 
+  // Color logic for macros
+  const getMacroColor = (eaten: number, target: number) => {
+    if (eaten > target + 50) return { color: '#ba1a1a', textColor: 'text-error' }
+    if (eaten > target - 50 && eaten <= target) return { color: '#ffc400', textColor: 'text-yellow-400' }
+    if (eaten > target) return { color: '#ffc400', textColor: 'text-yellow-400' }
+    return { color: '#4ae176', textColor: 'text-white' }
+  }
+
+  const proteinColor = getMacroColor(totalProteins, targetP)
+  const carbsColor = getMacroColor(totalCarbs, targetC)
+  const fatsColor = getMacroColor(totalFats, targetF)
+
   // Calendar setup
   const today = new Date()
   const currentDayOfWeek = today.getDay()
@@ -165,7 +177,7 @@ export default function Dashboard() {
                     cy="50"
                     fill="none"
                     r="40"
-                    stroke="#ff8a83"
+                    stroke={proteinColor.color}
                     strokeWidth="10"
                     strokeLinecap="round"
                     className="transition-all duration-1000"
@@ -181,40 +193,8 @@ export default function Dashboard() {
                   </span>
                 </div>
               </div>
-              <div className="font-body-sm text-sm font-semibold text-white leading-none">
-                {Math.round(totalProteins)}<span className="text-xs text-gray-400 font-normal ml-0.5">/{targetP}г</span>
-              </div>
-            </div>
-
-            {/* Carbs */}
-            <div className="bg-white/5 rounded-3xl p-3 flex flex-col items-center justify-center text-center border border-white/10">
-              <div className="font-label-caps text-gray-400 mb-1 text-xs uppercase">Углеводы</div>
-              <div className="relative w-12 h-12 mb-2">
-                <svg className="w-full h-full circle-progress" viewBox="0 0 100 100">
-                  <circle cx="50" cy="50" fill="none" r="40" stroke="rgba(255,255,255,0.1)" strokeWidth="10" />
-                  <circle
-                    cx="50"
-                    cy="50"
-                    fill="none"
-                    r="40"
-                    stroke="#fd761a"
-                    strokeWidth="10"
-                    strokeLinecap="round"
-                    className="transition-all duration-1000"
-                    style={{
-                      strokeDasharray: `${2 * Math.PI * 40}`,
-                      strokeDashoffset: `${2 * Math.PI * 40 - (carbsPercent / 100) * 2 * Math.PI * 40}`,
-                    }}
-                  />
-                </svg>
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <span className="material-symbols-outlined text-secondary-container text-sm" style={{ fontVariationSettings: "'FILL' 1" }}>
-                    bakery_dining
-                  </span>
-                </div>
-              </div>
-              <div className="font-body-sm text-sm font-semibold text-white leading-none">
-                {Math.round(totalCarbs)}<span className="text-xs text-gray-400 font-normal ml-0.5">/{targetC}г</span>
+              <div className={`font-body-sm text-sm font-semibold leading-none ${proteinColor.textColor}`}>
+                {targetP}<span className="text-xs text-gray-400 font-normal ml-0.5">/ {Math.round(totalProteins)}г</span>
               </div>
             </div>
 
@@ -229,7 +209,7 @@ export default function Dashboard() {
                     cy="50"
                     fill="none"
                     r="40"
-                    stroke="#dae2fd"
+                    stroke={fatsColor.color}
                     strokeWidth="10"
                     strokeLinecap="round"
                     className="transition-all duration-1000"
@@ -245,8 +225,40 @@ export default function Dashboard() {
                   </span>
                 </div>
               </div>
-              <div className="font-body-sm text-sm font-semibold text-white leading-none">
-                {Math.round(totalFats)}<span className="text-xs text-gray-400 font-normal ml-0.5">/{targetF}г</span>
+              <div className={`font-body-sm text-sm font-semibold leading-none ${fatsColor.textColor}`}>
+                {targetF}<span className="text-xs text-gray-400 font-normal ml-0.5">/ {Math.round(totalFats)}г</span>
+              </div>
+            </div>
+
+            {/* Carbs */}
+            <div className="bg-white/5 rounded-3xl p-3 flex flex-col items-center justify-center text-center border border-white/10">
+              <div className="font-label-caps text-gray-400 mb-1 text-xs uppercase">Углеводы</div>
+              <div className="relative w-12 h-12 mb-2">
+                <svg className="w-full h-full circle-progress" viewBox="0 0 100 100">
+                  <circle cx="50" cy="50" fill="none" r="40" stroke="rgba(255,255,255,0.1)" strokeWidth="10" />
+                  <circle
+                    cx="50"
+                    cy="50"
+                    fill="none"
+                    r="40"
+                    stroke={carbsColor.color}
+                    strokeWidth="10"
+                    strokeLinecap="round"
+                    className="transition-all duration-1000"
+                    style={{
+                      strokeDasharray: `${2 * Math.PI * 40}`,
+                      strokeDashoffset: `${2 * Math.PI * 40 - (carbsPercent / 100) * 2 * Math.PI * 40}`,
+                    }}
+                  />
+                </svg>
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <span className="material-symbols-outlined text-secondary-container text-sm" style={{ fontVariationSettings: "'FILL' 1" }}>
+                    bakery_dining
+                  </span>
+                </div>
+              </div>
+              <div className={`font-body-sm text-sm font-semibold leading-none ${carbsColor.textColor}`}>
+                {targetC}<span className="text-xs text-gray-400 font-normal ml-0.5">/ {Math.round(totalCarbs)}г</span>
               </div>
             </div>
           </div>
