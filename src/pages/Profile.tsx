@@ -76,15 +76,22 @@ export default function Profile() {
 
         {/* Goal */}
         <section>
-          <h3 className="font-headline-sm text-headline-sm text-white mb-card-gap">Моя цель</h3>
+          <h3 className="font-headline-sm text-headline-sm text-white mb-card-gap">Цель и суточная норма</h3>
           <div className="glass-panel-dark rounded-xl p-5 border border-white/10">
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-full bg-primary-fixed-dim/20 flex items-center justify-center text-primary-fixed-dim flex-shrink-0">
-                <span className="material-symbols-outlined">fitness_center</span>
+            <div className="space-y-4">
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-full bg-primary-fixed-dim/20 flex items-center justify-center text-primary-fixed-dim flex-shrink-0">
+                  <span className="material-symbols-outlined">fitness_center</span>
+                </div>
+                <div className="flex-1">
+                  <p className="font-body-sm text-gray-400 text-xs mb-1">Цель</p>
+                  <p className="font-headline-sm text-headline-sm text-white">{goalLabels[profile.goal] || profile.goal}</p>
+                </div>
               </div>
-              <div className="flex-1">
-                <p className="font-headline-sm text-headline-sm text-white">{goalLabels[profile.goal] || profile.goal}</p>
-                <p className="font-body-sm text-body-sm text-gray-400">{profile.target_k} ккал / день</p>
+              <div className="border-t border-white/10 pt-4">
+                <p className="font-body-sm text-gray-400 text-xs mb-2">Суточная норма</p>
+                <p className="font-display-lg-mobile text-primary-fixed-dim leading-none">{profile.target_k}</p>
+                <p className="font-body-sm text-gray-400 text-xs mt-1">ккал / день</p>
               </div>
             </div>
           </div>

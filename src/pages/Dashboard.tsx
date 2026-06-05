@@ -45,11 +45,24 @@ export default function Dashboard() {
   const targetF = profile?.target_f || 70
   const targetC = profile?.target_c || 275
 
-  const remaining = Math.max(0, targetK - totalCalories)
   const caloriePercent = Math.min((totalCalories / targetK) * 100, 100)
   const proteinPercent = Math.min((totalProteins / targetP) * 100, 100)
   const carbsPercent = Math.min((totalCarbs / targetC) * 100, 100)
   const fatsPercent = Math.min((totalFats / targetF) * 100, 100)
+
+  // Color logic for calories
+  let calorieColor = '#4ae176' // green (normal)
+  let calorieTextColor = 'text-white'
+  if (totalCalories > targetK + 50) {
+    calorieColor = '#ba1a1a' // red (over)
+    calorieTextColor = 'text-error'
+  } else if (totalCalories > targetK - 50 && totalCalories <= targetK) {
+    calorieColor = '#ffc400' // yellow (close)
+    calorieTextColor = 'text-yellow-400'
+  } else if (totalCalories > targetK) {
+    calorieColor = '#ffc400' // yellow (slightly over)
+    calorieTextColor = 'text-yellow-400'
+  }
 
   // Calendar setup
   const today = new Date()
@@ -114,7 +127,7 @@ export default function Dashboard() {
                     cy="50"
                     fill="none"
                     r="42"
-                    stroke="#4ae176"
+                    stroke={calorieColor}
                     strokeWidth="10"
                     strokeLinecap="round"
                     className="transition-all duration-1000"
@@ -125,16 +138,16 @@ export default function Dashboard() {
                   />
                 </svg>
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <span className="material-symbols-outlined text-primary-fixed-dim text-2xl" style={{ fontVariationSettings: "'FILL' 1" }}>
+                  <span className="material-symbols-outlined text-2xl" style={{ fontVariationSettings: "'FILL' 1", color: calorieColor }}>
                     local_fire_department
                   </span>
                 </div>
               </div>
               <div>
-                <h1 className="font-display-lg-mobile text-white leading-none mb-1">
-                  {remaining} <span className="text-headline-sm text-gray-400 font-normal">/ {targetK}</span>
+                <h1 className={`font-display-lg-mobile leading-none mb-1 ${calorieTextColor}`}>
+                  {Math.round(totalCalories)} <span className="text-headline-sm text-gray-400 font-normal">/ {targetK}</span>
                 </h1>
-                <p className="font-body-sm text-gray-400">ккал осталось</p>
+                <p className="font-body-sm text-gray-400">ккал</p>
               </div>
             </div>
           </div>
