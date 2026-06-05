@@ -18,11 +18,11 @@ export default function Profile() {
   }, [userId])
 
   if (loading) {
-    return <div className="flex items-center justify-center h-screen">Загрузка профиля...</div>
+    return <div className="flex items-center justify-center h-screen text-on-surface-variant">Загрузка профиля...</div>
   }
 
   if (!profile) {
-    return <div className="flex items-center justify-center h-screen">Профиль не найден</div>
+    return <div className="flex items-center justify-center h-screen text-on-surface-variant">Профиль не найден</div>
   }
 
   const goalLabels: Record<string, string> = {
@@ -40,67 +40,71 @@ export default function Profile() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white p-4">
-      <div className="max-w-md mx-auto pt-6">
+    <div className="min-h-screen bg-gradient-to-b from-surface-container-low to-background p-container-padding-mobile md:p-container-padding-desktop">
+      <div className="max-w-2xl mx-auto space-y-stack-md">
         {/* Header */}
-        <h1 className="text-2xl font-bold text-gray-800 mb-8">Мой профиль</h1>
+        <h1 className="font-headline-lg text-headline-lg text-on-background">Мой профиль</h1>
 
-        {/* Profile card */}
-        <div className="bg-gradient-primary rounded-lg p-6 text-white mb-6">
-          <h2 className="text-xl font-semibold mb-4">{profile.first_name}</h2>
+        {/* Profile Card */}
+        <div className="bg-gradient-to-br from-primary to-primary-container rounded-xl p-6 text-on-primary">
+          <h2 className="font-headline-md text-headline-md mb-4">{profile.first_name}</h2>
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <p className="text-sm opacity-90">Возраст</p>
-              <p className="text-lg font-semibold">{profile.age} лет</p>
+              <p className="text-sm opacity-90 mb-1">Возраст</p>
+              <p className="font-headline-md text-headline-md">{profile.age} лет</p>
             </div>
             <div>
-              <p className="text-sm opacity-90">Пол</p>
-              <p className="text-lg font-semibold">{profile.gender === 'male' ? '👨' : '👩'}</p>
+              <p className="text-sm opacity-90 mb-1">Пол</p>
+              <p className="font-headline-md text-headline-md">{profile.gender === 'male' ? '👨' : '👩'}</p>
             </div>
             <div>
-              <p className="text-sm opacity-90">Рост</p>
-              <p className="text-lg font-semibold">{profile.height} см</p>
+              <p className="text-sm opacity-90 mb-1">Рост</p>
+              <p className="font-headline-md text-headline-md">{profile.height} см</p>
             </div>
             <div>
-              <p className="text-sm opacity-90">Вес</p>
-              <p className="text-lg font-semibold">{profile.weight} кг</p>
+              <p className="text-sm opacity-90 mb-1">Вес</p>
+              <p className="font-headline-md text-headline-md">{profile.weight} кг</p>
             </div>
           </div>
         </div>
 
-        {/* Goals card */}
-        <div className="bg-white rounded-lg shadow p-6 mb-6">
-          <h3 className="font-semibold text-gray-800 mb-4">Цель и норма</h3>
+        {/* Goals Card */}
+        <div className="bg-white/70 backdrop-blur-sm rounded-xl p-6 border border-surface-variant">
+          <h3 className="font-headline-md text-headline-md text-on-background mb-4">Цель и норма</h3>
           <div className="space-y-4">
             <div>
-              <p className="text-sm text-gray-600">Цель</p>
-              <p className="text-lg font-semibold text-gray-800">{goalLabels[profile.goal] || profile.goal}</p>
+              <p className="text-sm text-on-surface-variant mb-1">Цель</p>
+              <p className="font-body-lg text-body-lg text-on-background">{goalLabels[profile.goal] || profile.goal}</p>
             </div>
-            <div>
-              <p className="text-sm text-gray-600">Дневная норма</p>
-              <p className="text-2xl font-bold text-green-600">{profile.target_k} ккал</p>
+            <div className="border-t border-surface-variant pt-4">
+              <p className="text-sm text-on-surface-variant mb-2">Дневная норма</p>
+              <p className="font-display-lg text-display-lg text-primary">{profile.target_k}</p>
+              <p className="text-sm text-on-surface-variant">ккал/день</p>
             </div>
-            <div className="grid grid-cols-3 gap-4 pt-4 border-t border-gray-200">
-              <div>
-                <p className="text-xs text-gray-600">Белки</p>
-                <p className="font-semibold text-gray-800">{profile.target_p}г</p>
+            <div className="grid grid-cols-3 gap-4 pt-4 border-t border-surface-variant">
+              <div className="flex flex-col items-center">
+                <div className="w-3 h-3 rounded-full bg-primary mb-2" />
+                <p className="text-xs text-on-surface-variant uppercase">Белки</p>
+                <p className="font-body-md text-body-md font-semibold text-on-background">{profile.target_p}г</p>
               </div>
-              <div>
-                <p className="text-xs text-gray-600">Жиры</p>
-                <p className="font-semibold text-gray-800">{profile.target_f}г</p>
+              <div className="flex flex-col items-center">
+                <div className="w-3 h-3 rounded-full bg-secondary-container mb-2" />
+                <p className="text-xs text-on-surface-variant uppercase">Жиры</p>
+                <p className="font-body-md text-body-md font-semibold text-on-background">{profile.target_f}г</p>
               </div>
-              <div>
-                <p className="text-xs text-gray-600">Углеводы</p>
-                <p className="font-semibold text-gray-800">{profile.target_c}г</p>
+              <div className="flex flex-col items-center">
+                <div className="w-3 h-3 rounded-full bg-error mb-2" />
+                <p className="text-xs text-on-surface-variant uppercase">Углеводы</p>
+                <p className="font-body-md text-body-md font-semibold text-on-background">{profile.target_c}г</p>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Activity card */}
-        <div className="bg-white rounded-lg shadow p-6">
-          <h3 className="font-semibold text-gray-800 mb-4">Активность</h3>
-          <p className="text-lg text-gray-800">{activityLabels[profile.activity] || profile.activity}</p>
+        {/* Activity Card */}
+        <div className="bg-white/70 backdrop-blur-sm rounded-xl p-6 border border-surface-variant">
+          <h3 className="font-headline-md text-headline-md text-on-background mb-4">Активность</h3>
+          <p className="font-body-lg text-body-lg text-on-background">{activityLabels[profile.activity] || profile.activity}</p>
         </div>
       </div>
     </div>
