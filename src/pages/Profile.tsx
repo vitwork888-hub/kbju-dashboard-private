@@ -40,17 +40,16 @@ export default function Profile() {
   }
 
   return (
-    <div className="pt-16 px-container-padding pb-20 bg-[#0b1326] min-h-screen">
+    <div className="pt-6 px-container-padding pb-32 bg-[#0b1326] min-h-screen">
       <div className="max-w-lg mx-auto space-y-section-margin">
         {/* Profile Hero */}
-        <section className="flex flex-col items-center justify-center py-6">
+        <section className="flex flex-col items-center justify-center py-4">
           <div className="relative mb-4">
-            <div className="w-28 h-28 rounded-full overflow-hidden border-4 border-primary-fixed-dim/20 shadow-lg bg-primary-fixed-dim/20 flex items-center justify-center text-4xl">
+            <div className="w-20 h-20 rounded-full overflow-hidden border-2 border-primary-fixed-dim/20 shadow-lg bg-primary-fixed-dim/10 flex items-center justify-center text-3xl">
               👤
             </div>
           </div>
           <h2 className="font-headline-md text-headline-md text-white">{profile.first_name}</h2>
-          <p className="font-body-sm text-body-sm text-gray-400 mt-1">{profile.email || 'user@example.com'}</p>
         </section>
 
         {/* Physical Data */}
@@ -78,19 +77,16 @@ export default function Profile() {
         {/* Goal */}
         <section>
           <h3 className="font-headline-sm text-headline-sm text-white mb-card-gap">Моя цель</h3>
-          <div className="glass-panel-dark rounded-xl p-5 flex items-center justify-between border border-white/10">
+          <div className="glass-panel-dark rounded-xl p-5 border border-white/10">
             <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-full bg-primary-fixed-dim/20 flex items-center justify-center text-primary-fixed-dim">
+              <div className="w-12 h-12 rounded-full bg-primary-fixed-dim/20 flex items-center justify-center text-primary-fixed-dim flex-shrink-0">
                 <span className="material-symbols-outlined">fitness_center</span>
               </div>
-              <div>
+              <div className="flex-1">
                 <p className="font-headline-sm text-headline-sm text-white">{goalLabels[profile.goal] || profile.goal}</p>
                 <p className="font-body-sm text-body-sm text-gray-400">{profile.target_k} ккал / день</p>
               </div>
             </div>
-            <button className="text-primary-fixed-dim hover:bg-white/10 p-2 rounded-full transition-colors">
-              <span className="material-symbols-outlined">chevron_right</span>
-            </button>
           </div>
         </section>
 
@@ -119,7 +115,7 @@ export default function Profile() {
         </section>
 
         {/* Activity */}
-        <section>
+        <section className="pb-8">
           <h3 className="font-headline-sm text-headline-sm text-white mb-card-gap">Активность</h3>
           <div className="glass-panel-dark rounded-xl p-5 border border-white/10">
             <p className="font-body-lg text-body-lg text-white">{activityLabels[profile.activity] || profile.activity}</p>

@@ -30,11 +30,6 @@ export default function BottomNav({ currentPage, onPageChange }: BottomNavProps)
           </span>
         </button>
       ))}
-
-      {/* FAB Button */}
-      <button className="absolute -right-2 -top-2 bg-white text-[#0b1326] w-14 h-14 rounded-full flex items-center justify-center shadow-xl hover:scale-105 active:scale-95 transition-transform z-50">
-        <span className="material-symbols-outlined text-2xl">add</span>
-      </button>
     </nav>
   )
 }

@@ -69,14 +69,14 @@ export default function Dashboard() {
   })
 
   return (
-    <div className="pt-20 px-container-padding pb-32 bg-[#0b1326] min-h-screen">
+    <div className="pt-5 px-container-padding pb-32 bg-[#0b1326] min-h-screen">
       <div className="max-w-4xl mx-auto space-y-5">
         {/* Bot Name Header */}
-        <div className="flex items-center gap-2 mb-6">
-          <span className="material-symbols-outlined text-primary-fixed-dim text-3xl" style={{ fontVariationSettings: "'FILL' 1" }}>
+        <div className="flex items-center gap-2 mb-4">
+          <span className="material-symbols-outlined text-primary-fixed-dim text-2xl" style={{ fontVariationSettings: "'FILL' 1" }}>
             eco
           </span>
-          <h1 className="font-headline-sm text-white font-bold">Cal AI</h1>
+          <h1 className="font-headline-sm text-white font-bold">КБЖУ</h1>
         </div>
 
         {/* Calendar Strip */}
@@ -86,14 +86,10 @@ export default function Dashboard() {
               key={i}
               className={`flex flex-col items-center gap-1 ${day.isToday ? '' : 'opacity-50'}`}
             >
-              <span className="font-label-caps text-label-caps text-gray-400">{day.day}</span>
+              <span className="font-label-caps text-label-caps text-gray-400 text-xs">{day.day}</span>
               {day.isToday ? (
-                <div className="flex flex-col items-center gap-1 bg-white/10 rounded-full p-1 pb-2 shadow-sm border border-primary-fixed-dim/30 relative">
-                  <span className="font-label-caps text-label-caps text-white mt-1 px-2 text-xs">{day.day}</span>
-                  <div className="w-10 h-10 flex items-center justify-center rounded-full bg-primary-fixed-dim/20 border-2 border-primary-fixed-dim text-primary-fixed-dim font-bold text-sm">
-                    {day.date}
-                  </div>
-                  <div className="absolute -bottom-1 w-1 h-1 bg-primary-fixed-dim rounded-full" />
+                <div className="w-10 h-10 flex items-center justify-center rounded-full bg-primary-fixed-dim/20 border-2 border-primary-fixed-dim text-primary-fixed-dim font-bold text-sm">
+                  {day.date}
                 </div>
               ) : (
                 <span className="font-body-sm text-body-sm w-10 h-10 flex items-center justify-center text-white">{day.date}</span>
@@ -244,7 +240,7 @@ export default function Dashboard() {
         </section>
 
         {/* Food Log */}
-        <section className="flex flex-col gap-4 pb-8">
+        <section className="flex flex-col gap-4 pb-24">
           <h2 className="font-headline-sm text-headline-sm text-white">Дневник за сегодня</h2>
 
           {calories.length === 0 ? (

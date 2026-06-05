@@ -57,7 +57,7 @@ export default function Statistics() {
   }).length
 
   return (
-    <div className="pt-16 px-container-padding pb-20 bg-[#0b1326] min-h-screen">
+    <div className="pt-6 px-container-padding pb-32 bg-[#0b1326] min-h-screen">
       <div className="max-w-lg mx-auto space-y-section-margin">
         {/* Header */}
         <div>
