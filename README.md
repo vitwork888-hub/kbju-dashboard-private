@@ -1,139 +1,139 @@
-# КБЖУ Дневник - Telegram Mini App
+# 🥗 KBZU Diary — Telegram Mini App
 
-Веб-приложение для отслеживания питания прямо в Telegram.
+A sleek web app for tracking calories and macros directly inside Telegram.
 
-## 🚀 Основные возможности
+## 🚀 Features
 
-- **Dashboard** — суточный калории и КБЖУ на большой круговой диаграмме (Easy Fit стиль)
-- **Profile** — просмотр профиля с целью, нормой калорий и параметрами
-- **Statistics** — история питания за 7/30 дней с графиками
-- **Telegram Integration** — полная интеграция с Telegram WebApp API для аутентификации
-- **Supabase** — чтение данных из БД с RLS политиками по user_id
+- **Dashboard** — Daily calorie & macro totals with circular progress chart (Easy Fit style)
+- **Profile** — View your profile, goals, calorie target, and body metrics
+- **Statistics** — 7 & 30-day nutrition history with trend charts
+- **Telegram Integration** — Seamless integration with Telegram WebApp API for authentication
+- **Supabase** — Secure database with row-level security (RLS) per user
 
-## 🛠 Технологический стек
+## 🛠 Tech Stack
 
 - **Frontend:** React 18 + TypeScript + Vite
-- **Styling:** Tailwind CSS с Easy Fit color scheme (green→blue gradient)
-- **Backend:** Supabase (PostgreSQL + RLS)
-- **Hosting:** GitHub Pages (static)
-- **CI/CD:** GitHub Actions
+- **Styling:** Tailwind CSS with Easy Fit color scheme (green → blue gradient)
+- **Backend:** Supabase (PostgreSQL + Row-Level Security)
+- **Hosting:** GitHub Pages (static deployment)
+- **CI/CD:** GitHub Actions (automated builds)
 
-## 📋 Требования
+## 📋 Requirements
 
 - Node.js 20+
-- npm или yarn
-- Аккаунт Supabase с таблицами `users`, `calories`
+- npm or yarn
+- Supabase account with `users` and `calories` tables configured
 
-## 🔧 Установка
+## 🔧 Installation
 
 ```bash
-# Клонируем репозиторий
-git clone https://github.com/vitwork888/kbju-dashboard-private.git
+# Clone the repository
+git clone https://github.com/vitwork888-hub/kbju-dashboard-private.git
 cd kbju-dashboard-private
 
-# Установим зависимости
+# Install dependencies
 npm install
 
-# Создаём .env.local (скопируем .env.example и заполним)
+# Create .env.local file (copy from .env.example and fill in values)
 cp .env.example .env.local
 ```
 
-Заполните `.env.local`:
+Fill in your `.env.local`:
 ```
 VITE_SUPABASE_URL=https://your-project.supabase.co
-VITE_SUPABASE_ANON_KEY=your-anon-key
+VITE_SUPABASE_ANON_KEY=your-public-anon-key
 ```
 
-## 🏃 Разработка
+## 🏃 Development
 
 ```bash
-# Запуск dev сервера на http://localhost:5173
+# Start dev server at http://localhost:5173
 npm run dev
 
-# Build для продакшена
+# Build for production
 npm run build
 
-# Preview production build
+# Preview the production build locally
 npm run preview
 ```
 
-## 📁 Структура проекта
+## 📁 Project Structure
 
 ```
 src/
-├── components/        # React компоненты (Layout, BottomNav)
-├── pages/            # Страницы приложения (Dashboard, Profile, Statistics)
-├── lib/              # Утилиты (Telegram SDK, Supabase клиент)
+├── components/        # React components (Layout, BottomNav, etc)
+├── pages/            # App pages (Dashboard, Profile, Statistics)
+├── lib/              # Utilities (Telegram SDK, Supabase client)
 ├── context/          # React Context (TelegramContext)
 ├── hooks/            # Custom React hooks
-├── styles/           # CSS (Tailwind)
-├── App.tsx           # Root компонент
-└── main.tsx          # Entry point
+├── styles/           # Tailwind CSS styles
+├── App.tsx           # Root component
+└── main.tsx          # App entry point
 
 public/
-└── index.html        # HTML с Telegram WebApp SDK script tag
+└── index.html        # HTML with Telegram WebApp SDK script
 ```
 
-## 🚢 Деплой
+## 🚢 Deployment
 
-На каждый push в main ветку:
-1. GitHub Actions запускает `npm run build`
-2. Результат из `dist/` деплоится на GitHub Pages
-3. Доступен по адресу: https://vitwork888.github.io/kbju-dashboard-private/
+On every push to main branch:
+1. GitHub Actions runs `npm run build`
+2. Build output from `dist/` is deployed to GitHub Pages
+3. Live at: https://vitwork888-hub.github.io/kbju-dashboard-private/
 
-### Настройка GitHub Pages
+### GitHub Pages Setup
 
-1. Перейти в Settings → Pages
-2. Выбрать `Deploy from a branch`
-3. Выбрать ветку `gh-pages`
-4. Сохранить
+1. Go to Settings → Pages
+2. Select "Deploy from a branch"
+3. Choose `gh-pages` branch
+4. Save
 
-## 🔐 Переменные окружения
+## 🔐 Environment Variables
 
-В GitHub Actions нужно добавить secrets:
-- `VITE_SUPABASE_URL` — URL вашего Supabase проекта
-- `VITE_SUPABASE_ANON_KEY` — анон ключ для публичного доступа
+Add these secrets to GitHub Actions:
+- `VITE_SUPABASE_URL` — Your Supabase project URL
+- `VITE_SUPABASE_ANON_KEY` — Public anonymous API key
 
-Settings → Secrets and variables → Actions → New repository secret
+Go to: Settings → Secrets and variables → Actions → New repository secret
 
-## 📱 Использование как Telegram Mini App
+## 📱 Using as Telegram Mini App
 
-Добавьте кнопку в Telegram бота:
+Add a button to your Telegram bot:
 ```javascript
-const webAppUrl = 'https://vitwork888.github.io/kbju-dashboard-private/';
+const webAppUrl = 'https://vitwork888-hub.github.io/kbju-dashboard-private/';
 
-// В клавиатуре бота:
+// In your bot's keyboard:
 {
-  text: 'Открыть дневник',
+  text: 'Open Diary',
   web_app: {
     url: webAppUrl
   }
 }
 ```
 
-При открытии Mini App получит данные текущего пользователя через `window.Telegram.WebApp.initDataUnsafe.user`.
+When opened, the Mini App receives user data via `window.Telegram.WebApp.initDataUnsafe.user`.
 
 ## 🎨 Design System
 
-Используется Easy Fit inspired цветовая схема:
+Easy Fit inspired color scheme:
 - **Primary Green:** #10b981
 - **Secondary Blue:** #3b82f6
 - **Accent Pink (Proteins):** #ec4899
 - **Accent Amber (Fats):** #f59e0b
 - **Accent Blue (Carbs):** #3b82f6
 
-## 📊 Wave структура разработки
+## 📊 Development Waves
 
 - **Wave 0:** Foundational setup (config, lib, pages, components) ✅
 - **Wave 1:** Enhanced Dashboard (CalorieCircle, MacroCircles, FoodDiary list)
 - **Wave 2:** Profile & Stats improvements (charts, date ranges)
 - **Wave 3:** Bot integration, E2E testing, performance optimization
 
-## 🔗 Связанные проекты
+## 🔗 Related Projects
 
-- **n8n Bot:** https://github.com/vitwork888/kbju-bot — основной бот на n8n, добавляет записи в БД
-- **Supabase:** Общая БД для бота и Mini App
+- **[KBZU Bot](https://github.com/vitwork888-hub/kbju-bot)** — Main n8n bot that logs food entries to the database
+- **[Supabase](https://supabase.com)** — Shared database for bot & Mini App
 
-## 📝 Лицензия
+## 📝 License
 
-Private repository. 2026 VIT.
+Private repository. 2026 © VIT
