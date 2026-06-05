@@ -30,16 +30,12 @@ export default function Profile() {
     bulk: '📈 Набор массы',
     maintain: '⚖️ Поддержание',
     custom: '🎯 Свой план',
-    'cut': '📉 Похудение',
-    'bulk': '📈 Набор массы',
-    'maintain': '⚖️ Поддержание',
   }
 
-  // Get goal label or show raw value if not found
   const getGoalLabel = (goal: string) => {
     if (!goal) return '🎯 Цель'
     const normalized = goal.toLowerCase().trim()
-    return goalLabels[normalized] || `${goal}`
+    return goalLabels[normalized] || goal
   }
 
   const activityLabels: Record<string, string> = {
