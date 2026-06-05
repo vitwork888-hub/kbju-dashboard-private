@@ -18,13 +18,16 @@ export function TelegramProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     const init = initTelegramWebApp()
+    console.log('🔷 Telegram Init:', { userId: init?.userId, tg: !!init?.tg })
     if (init) {
+      console.log('✅ User ID set:', init.userId)
       setContext({
         tg: init.tg,
         userId: init.userId,
         isReady: true,
       })
     } else {
+      console.warn('⚠️ Telegram not available (not in Mini App?)')
       setContext(prev => ({ ...prev, isReady: true }))
     }
   }, [])

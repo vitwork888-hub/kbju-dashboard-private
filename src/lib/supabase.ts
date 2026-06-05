@@ -10,6 +10,7 @@ if (!supabaseUrl || !supabaseAnonKey) {
 export const supabase = createClient(supabaseUrl, supabaseAnonKey)
 
 export async function getUserProfile(userId: number) {
+  console.log('🔍 Fetching profile for userId:', userId)
   const { data, error } = await supabase
     .from('users')
     .select('*')
@@ -17,15 +18,17 @@ export async function getUserProfile(userId: number) {
     .single()
 
   if (error) {
-    console.error('Error fetching user profile:', error)
+    console.error('❌ Error fetching user profile:', { userId, error })
     return null
   }
 
+  console.log('✅ Profile loaded:', data?.first_name)
   return data
 }
 
 export async function getTodayCalories(userId: number) {
   const today = new Date().toISOString().split('T')[0]
+  console.log('🔍 Fetching calories for userId:', userId, 'date:', today)
 
   const { data, error } = await supabase
     .from('calories')
@@ -34,10 +37,11 @@ export async function getTodayCalories(userId: number) {
     .eq('date', today)
 
   if (error) {
-    console.error('Error fetching calories:', error)
+    console.error('❌ Error fetching calories:', { userId, date: today, error })
     return []
   }
 
+  console.log('✅ Calories loaded:', data?.length, 'records')
   return data || []
 }
 
